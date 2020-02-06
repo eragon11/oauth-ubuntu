@@ -1,0 +1,118 @@
+<html>
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.2/css/adminlte.min.css">
+  <style>
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 48px;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    margin-left: 2px;
+    background: #fff;
+    border-top: 1px solid #dee2e6;
+    color: #869099;
+  }
+ .footerdata {
+    float: left;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    padding-top: 11px;
+    padding-left: 3px;
+    color: #797a7b;
+   }
+  .copyright {
+    float: right;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    padding-top: 11px;
+    padding-right: 6px;
+    color: #797a7b;
+   }
+  </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://files.onlosant.com/5df21104f0be720006b6f1f3/assets/js/bootstrap.bundle.min.js"></script>
+      <script src="https://files.onlosant.com/5df21104f0be720006b6f1f3/assets/js/adminlte.min.js"></script>
+    </head>
+ 
+  <body class="hold-transition login-page">
+   <div class="login-box">
+  <div class="login-logo">
+    <img src="https://files.onlosant.com/5df21104f0be720006b6f1f3/assets/images/verizonlogo-4.png" style="width:50%">
+  </div>
+  <div class="card">
+    <div class="card-body login-card-body">
+      <img src="https://files.onlosant.com/5df21104f0be720006b6f1f3/device-images/GOOD%20NEW.png" style="width: 80%; margin-left: 25px;"/>
+       <p class="login-box-msg">Sign in to start your session</p>
+      <div class="alert alert-danger alert-dismissible" role="alert" id="error" style="display:none"></div>   
+      <form  class="panel-page-form" name="myForm" action="/oauth/authorize" onsubmit="return validateForm()" method="POST">
+        <div class="input-group mb-4">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-4">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="" >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="d-none">
+          <input type="hidden" name="client_id" placeholder="client_id" value="" >
+          <input type="hidden" name="redirect_uri" placeholder="redirect_uri" value="" >
+          <input type="hidden" name="response_type" placeholder="response_type" value="" >
+          <input type="hidden" name="grant_type" placeholder="grant_type" value="" >
+          <input type="hidden" name="state" placeholder="state" value="" >
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <!-- <div class="icheck-primary" style="padding-top:8px">
+                            <a href="/ves-forgotpassword">Forgot Password?</a>
+                </div> -->
+               </div>
+            <div class="col-4">
+                <button type="submit" id="btn_submit" class="btn btn-sm btn-dark btn-block">Sign In</button>
+             </div>
+        </div>
+      </form>        
+    </div>
+  </div>
+</div>    
+ <div class="footer">
+      <p class="footerdata">Proprietary and Confidential. Not for disclosure outside of Verizon.</p><p id="year" class="copyright">Copyright © Verizon </p>
+</div>
+<script>
+$(document).ready(function() {
+        var date = new Date();
+              var year = date.getFullYear();
+        $('#year').append(year);
+})
+  </script> 
+  <script>
+    ;(function(){
+      const urlParams = new URLSearchParams(window.location.search)
+      ;['client_id','redirect_uri', 'response_type', 'grant_type', 'state'].forEach(type => {
+        const input = document.body.querySelector(`input[name=${type}]`)
+        const value = urlParams.get(type)
+        input.value = value
+      })
+      const error = urlParams.get('success') === 'false'
+      if(error) {
+        document.body.querySelectorAll('.auth').forEach(el => el.classList.add('is-invalid'))
+      }
+    }())
+    </script>
+</body>
+</html>
