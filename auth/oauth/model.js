@@ -38,7 +38,7 @@ module.exports = {
       clientId: clientId,
       clientSecret: clientSecret,
       grants: ['authorization_code', 'refresh_token'],
-      redirectUris: ['http://localhost:3030/client/app'],
+      redirectUris: ['https://layla.amazon.com/api/skill/link/M1330Y1NZC8Q2M'],
       // redirectUris: ['https://alexa.amazon.co.jp/api/skill/link/M1330Y1NZC8Q2M']
     }
     return new Promise(resolve => {
