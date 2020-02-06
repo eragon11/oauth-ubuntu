@@ -1,6 +1,7 @@
 const express = require('express')
-
+const https = require('https')
 const app = express()
+const fs = require('fs')
 const port = 3030
 const bodyParser = require('body-parser')
 const oauthServer = require('./oauth/server.js')
@@ -21,8 +22,13 @@ app.use('/secure', (req,res,next) => {
 },oauthServer.authenticate(), require('./routes/secure.js')) // routes to access the protected stuff
 // app.use('/', (req,res) => res.redirect('/client'))
 
-
-app.listen(port)
-console.log("Oauth Server listening on port ", port)
+https.createServer({
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.crt'),
+  passphrase: "hello"
+}, app)
+.listen(3030, function () {
+  console.log("Oauth Server listening on port ", port)
+})
 
 module.exports = app // For testing
